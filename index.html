@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+</head>
+<body>
+  <h2>WEBSOCKET BY SHAMS</h2>
+  <span class="output"></span>
+
+  <script>
+    url="ws://localhost:9000/ws";
+    client = new WebSocket(url);
+    
+    sende= function(data){
+    `${".output"}.append(new Date())+"==>"`+data+`/n`;
+     
+    client.send(data);
+   }
+
+   client.onmessage=function(data){
+    `${".output"}.append(new Date())+"<=="`+data.data+`/n`;
+   }
+
+
+   client.onopen=function(){
+    setInterval(
+      function(){
+        sende("ping ping");
+      },1000)
+    }
+  
+  </script>
+</body>
+</html>
